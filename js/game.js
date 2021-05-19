@@ -119,7 +119,6 @@ function createScene() {
   camera.position.x = 0;
   camera.position.z = 200;
   camera.position.y = game.planeDefaultHeight;
-  //camera.lookAt(new THREE.Vector3(0, 400, 0));
 
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(WIDTH, HEIGHT);
@@ -131,14 +130,6 @@ function createScene() {
 
   window.addEventListener('resize', handleWindowResize, false);
 
-  /*
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.minPolarAngle = -Math.PI / 2;
-  controls.maxPolarAngle = Math.PI ;
-
-  //controls.noZoom = true;
-  //controls.noPan = true;
-  //*/
 }
 
 
@@ -299,7 +290,6 @@ var AirPlane = function(){
   this.mesh = new THREE.Object3D();
   this.mesh.name = "airPlane";
 
-  // Cabin
 
   var geomCabin = new THREE.BoxGeometry(80,50,50,1,1,1);
   var matCabin = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
@@ -318,7 +308,6 @@ var AirPlane = function(){
   cabin.receiveShadow = true;
   this.mesh.add(cabin);
 
-  // Engine
 
   var geomEngine = new THREE.BoxGeometry(20,50,50,1,1,1);
   var matEngine = new THREE.MeshPhongMaterial({color:Colors.white, shading:THREE.FlatShading});
@@ -328,7 +317,6 @@ var AirPlane = function(){
   engine.receiveShadow = true;
   this.mesh.add(engine);
 
-  // Tail Plane
 
   var geomTailPlane = new THREE.BoxGeometry(15,20,5,1,1,1);
   var matTailPlane = new THREE.MeshPhongMaterial({color:Colors.white, shading:THREE.FlatShading});
@@ -338,7 +326,6 @@ var AirPlane = function(){
   tailPlane.receiveShadow = true;
   this.mesh.add(tailPlane);
 
-  // Wings
 
   var geomSideWing = new THREE.BoxGeometry(30,5,120,1,1,1);
   var matSideWing = new THREE.MeshPhongMaterial({color:Colors.white, shading:THREE.FlatShading});
@@ -479,7 +466,6 @@ Sea = function(){
 
   for (var i=0;i<l;i++){
     var v = geom.vertices[i];
-    //v.y = Math.random()*30;
     this.waves.push({y:v.y,
                      x:v.x,
                      z:v.z,
@@ -733,7 +719,6 @@ CoinsHolder.prototype.rotateCoins = function(){
     coin.mesh.rotation.z += Math.random()*.1;
     coin.mesh.rotation.y += Math.random()*.1;
 
-    //var globalCoinPosition =  coin.mesh.localToWorld(new THREE.Vector3());
     var diffPos = airplane.mesh.position.clone().sub(coin.mesh.position.clone());
     var d = diffPos.length();
     if (d<game.coinDistanceTolerance){
@@ -805,7 +790,6 @@ function loop(){
 
   if (game.status=="playing"){
 
-    // Add energy coins every 100m;
     if (Math.floor(game.distance)%game.distanceForCoinsSpawn == 0 && Math.floor(game.distance) > game.coinLastSpawn){
       game.coinLastSpawn = Math.floor(game.distance);
       coinsHolder.spawnCoins();
